@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회계팀 5분 브리핑 - 2026년 7월 13일</title>
+  <style>
+    :root {
+      --bg: #f4f6f7;
+      --surface: #ffffff;
+      --surface-2: #f9fafb;
+      --text: #1f2933;
+      --muted: #667085;
+      --line: #d9e0e7;
+      --tax: #315f72;
+      --cash: #6a5a2f;
+      --industry: #3d6b4f;
+      --global: #4c5f8f;
+      --light: #7a5966;
+      --danger: #9b3d3d;
+      --warn: #8a651f;
+      --ok: #2d6a4f;
+      --link: #1f6fae;
+      --shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 650;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px 18px;
+      background: #111827;
+      color: #f8fafc;
+      overflow-y: auto;
+    }
+
+    .brand {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+      margin-bottom: 16px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .brand span {
+      display: block;
+      color: #cbd5e1;
+      font-size: 12px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 9px 10px;
+      margin: 2px 0;
+      color: #dbe4ee;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: rgba(255,255,255,0.10);
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    main {
+      padding: 24px;
+      max-width: 1440px;
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .title h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .asof {
+      min-width: 260px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .asof b {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .asof span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 10px;
+      background: rgba(244, 246, 247, 0.94);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+
+    .search input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 12px;
+      font-size: 14px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: #344054;
+      border-radius: 6px;
+      height: 34px;
+      padding: 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter.active {
+      background: #1f2933;
+      border-color: #1f2933;
+      color: #fff;
+    }
+
+    section {
+      scroll-margin-top: 86px;
+      margin-bottom: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 12px;
+      padding-top: 4px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 118px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+
+    .metric:hover {
+      transform: scale(1.025);
+      border-color: #b8c5d1;
+      box-shadow: 0 16px 34px rgba(31, 41, 51, 0.14);
+      z-index: 2;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      margin-bottom: 10px;
+    }
+
+    .metric .value {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .move {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .up { color: #b42318; }
+    .down { color: #175cd3; }
+    .flat { color: #475467; }
+
+    /* 전일 종가: note와 분리해 한눈에 들어오도록 별도 줄로 표시 */
+    .prev {
+      display: block;
+      margin-top: 3px;
+      color: #475467;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .prev b {
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric-toggle {
+      display: block;
+      margin-top: 8px;
+      color: var(--link);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .metric-toggle::after { content: "사유 보기 ▾"; }
+    .metric.open .metric-toggle::after { content: "접기 ▴"; }
+
+    .metric-detail {
+      display: none;
+      margin-top: 9px;
+      padding-top: 9px;
+      border-top: 1px dashed var(--line);
+      color: #475467;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .metric.open .metric-detail { display: block; }
+
+    .metric-detail p { margin: 0 0 6px; }
+    .metric-detail p:last-child { margin-bottom: 0; }
+
+    .bond-rates {
+      display: flex;
+      gap: 8px;
+      margin: 2px 0 8px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bond-rates li {
+      flex: 1;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 4px;
+      text-align: center;
+    }
+
+    .bond-rates .bond-term {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .bond-rates .bond-value {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.018);
+      border-color: #b8c5d1;
+      box-shadow: 0 16px 34px rgba(31, 41, 51, 0.14);
+      z-index: 2;
+    }
+
+    .card.priority {
+      border-color: #9bb4c3;
+      box-shadow: 0 0 0 2px rgba(49, 95, 114, 0.10), var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.38;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0 0 9px;
+      color: #475467;
+      font-size: 14px;
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 9px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: #edf2f7;
+      color: #344054;
+    }
+
+    .badge.tax { background: #e6f1f5; color: var(--tax); }
+    .badge.cash { background: #f4eedc; color: var(--cash); }
+    .badge.industry { background: #e9f4ed; color: var(--industry); }
+    .badge.global { background: #ecf0fb; color: var(--global); }
+    .badge.light { background: #f7edf2; color: var(--light); }
+    .badge.warn { background: #fff4d6; color: var(--warn); }
+    .badge.danger { background: #fde8e8; color: var(--danger); }
+    .badge.ok { background: #e6f4ef; color: var(--ok); }
+
+    .source {
+      padding-top: 8px;
+      border-top: 1px solid #eef2f5;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--tax);
+      border-radius: 8px;
+      padding: 13px;
+      box-shadow: var(--shadow);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+
+    .check:hover {
+      transform: scale(1.018);
+      border-color: #b8c5d1;
+      box-shadow: 0 16px 34px rgba(31, 41, 51, 0.14);
+      z-index: 2;
+    }
+
+    .check:nth-child(2) { border-left-color: var(--cash); }
+    .check:nth-child(3) { border-left-color: var(--industry); }
+    .check:nth-child(4) { border-left-color: var(--warn); }
+    .check:nth-child(5) { border-left-color: var(--global); }
+
+    .check .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #1f2933;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .check h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .check dl {
+      margin: 0;
+    }
+
+    .check dt {
+      margin-top: 8px;
+      color: #344054;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .check dd {
+      margin: 2px 0 0;
+      color: #52606d;
+      font-size: 13px;
+    }
+
+    /* 체크포인트 → 상세 섹션 이동 링크. 구조는 고정, href·문구만 매일 교체 */
+    .check-more {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--link);
+    }
+
+    .quote {
+      background: #111827;
+      color: #fff;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 750;
+    }
+
+    .quote span {
+      display: block;
+      margin-top: 8px;
+      color: #cbd5e1;
+      font-size: 12px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 1180px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        height: auto;
+        padding: 14px 16px;
+      }
+      .nav {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+      .nav a { white-space: nowrap; }
+      main { padding: 18px; }
+      .metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 780px) {
+      .topbar { display: block; }
+      .asof { margin-top: 12px; min-width: 0; }
+      .toolbar { grid-template-columns: 1fr; }
+      .filters { justify-content: flex-start; }
+      .metrics,
+      .grid,
+      .grid.two,
+      .checklist { grid-template-columns: 1fr; }
+      .title h1 { font-size: 24px; }
+      .metric { min-height: auto; }
+      main { padding: 14px; }
+      .bond-rates { flex-wrap: wrap; }
+      .bond-rates li { min-width: 30%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 고정 템플릿 수정본: 기존 불필요한 요약 섹션을 제거하고, 이후 섹션 번호를 3~9번으로 재정렬함 -->
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>회계팀 5분 브리핑</strong>
+        <span>레미콘·PHC파일·골재 제조업 회계팀용</span>
+      </div>
+      <nav class="nav" aria-label="섹션 이동">
+        <a href="#metrics">1. 핵심 지표</a>
+        <a href="#checkpoints">2. 체크포인트</a>
+        <a href="#finance">3. 경제·금융</a>
+        <a href="#industry">4. 산업·건자재</a>
+        <a href="#competitors">5. 경쟁사 동향</a>
+        <a href="#global">6. 글로벌</a>
+        <a href="#ai">7. 생성형 AI</a>
+        <a href="#coffee">8. 가벼운 기사</a>
+        <a href="#energy">9. 오늘의 한 줄</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="title">
+          <h1>회계팀 5분 브리핑</h1>
+          <p style="margin:8px 0 0;color:#b42318;font-weight:700;">테스트 메일 발송 확인용 임시 문구입니다.</p>
+          <p>업종 맥락: 레미콘·PHC파일·골재 제조업 회계팀 브리핑</p>
+        </div>
+        <div class="asof">
+          <b>기준 시점</b>
+          <span>2026년 7월 13일 07:30 KST 작성</span>
+          <span>시장지표는 7월 10일 장마감 및 주말 공개 화면 기준</span>
+        </div>
+      </header>
+
+      <div class="toolbar" aria-label="검색 및 필터">
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="키워드 검색: 부가세, 환율, PHC, 대출금리, AI 등">
+        </div>
+        <div class="filters" role="group" aria-label="업무 영향도 필터">
+          <button class="filter active" data-filter="all">전체 보기</button>
+          <button class="filter" data-filter="tax">세무·회계</button>
+          <button class="filter" data-filter="cash">자금·환율</button>
+          <button class="filter" data-filter="industry">건자재·원가</button>
+          <button class="filter" data-filter="global">글로벌</button>
+          <button class="filter" data-filter="light">가벼운 기사</button>
+        </div>
+      </div>
+
+
+<section id="metrics">
+  <div class="section-head">
+    <h2>1. 핵심 지표 요약</h2>
+    <p>시장지표 요약. 카드를 클릭하면 변동 사유가 펼쳐집니다</p>
+  </div>
+  <div class="metrics">
+    <article class="metric" data-category="cash" data-search="코스피 반도체 사이드카 기관 매수 증시 변동성">
+      <div class="label">코스피</div>
+      <span class="value">7,475.94</span>
+      <span class="move up">▲ 184.03p</span>
+      <span class="prev">전일 종가 <b>7,291.91</b></span>
+      <span class="note"><a href="https://mobile.newsis.com/view_amp.html?ar_id=NISX20260710_0003704634" target="_blank" rel="noopener">뉴시스</a> 7월 10일 장마감</span>
+      <span class="metric-toggle"></span>
+      <div class="metric-detail">
+        <p>10일 코스피는 기관 매수와 반도체 중심 반등으로 2.52% 상승 마감했습니다. 다만 직전 급락 뒤 되돌림 성격이 강해 금융상품 평가와 거래처 유동성 판단은 보수적으로 보는 편이 안전합니다.</p>
+        <p>출처: <a href="https://mobile.newsis.com/view_amp.html?ar_id=NISX20260710_0003704634" target="_blank" rel="noopener">뉴시스 / 코스피·코스닥 마감</a></p>
+      </div>
+    </article>
+    <article class="metric" data-category="cash" data-search="코스닥 성장주 사이드카 증시 변동성">
+      <div class="label">코스닥</div>
+      <span class="value">837.43</span>
+      <span class="move up">▲ 43.43p</span>
+      <span class="prev">전일 종가 <b>794.00</b></span>
+      <span class="note"><a href="https://kr.investing.com/indices/kosdaq-historical-data" target="_blank" rel="noopener">Investing.com</a> 7월 10일 장마감</span>
+      <span class="metric-toggle"></span>
+      <div class="metric-detail">
+        <p>코스닥은 5.47% 상승하며 매수 사이드카가 발동됐습니다. 성장주 변동성이 큰 만큼 보유 금융상품, 담보성 자산, 협력사 주가 신호는 단기 반등만으로 판단하지 않는 것이 좋습니다.</p>
+        <p>출처: <a href="https://kr.investing.com/indices/kosdaq-historical-data" target="_blank" rel="noopener">Investing.com / KOSDAQ Historical Data</a></p>
+      </div>
+    </article>
+    <article class="metric" data-category="cash" data-search="원달러 환율 외화환산손익 수입원가 결제">
+      <div class="label">원/달러 환율</div>
+      <span class="value">1,499.15원</span>
+      <span class="move down">▼ 6.43원</span>
+      <span class="prev">전일 종가 <b>1,505.58원</b></span>
+      <span class="note"><a href="https://kr.investing.com/currencies/usd-krw-historical-data" target="_blank" rel="noopener">Investing.com</a> 7월 10일 종가</span>
+      <span class="metric-toggle"></span>
+      <div class="metric-detail">
+        <p>Investing.com 과거 데이터 기준 USD/KRW는 7월 10일 1,499.15원으로 전일 대비 하락했습니다. 외화 미지급금과 수입 원재료 결제 예정분은 1,500원 안팎의 민감도표로 다시 확인하면 좋습니다.</p>
+        <p>출처: <a href="https://kr.investing.com/currencies/usd-krw-historical-data" target="_blank" rel="noopener">Investing.com / USD KRW Historical Data</a></p>
+      </div>
+    </article>
+    <article class="metric" data-category="cash" data-search="국고채 금리 3년 5년 10년 차입 할인율">
+      <div class="label">국고채 금리</div>
+      <span class="value">3.768%</span>
+      <span class="move down">▼ 0.010%p</span>
+      <span class="prev">전일 종가 <b>3.778%</b></span>
+      <span class="note"><a href="https://www.yna.co.kr/view/AKR20260710136900008" target="_blank" rel="noopener">연합뉴스</a> 7월 10일 장마감, 3년물</span>
+      <span class="metric-toggle"></span>
+      <div class="metric-detail">
+        <p>10일 국고채 금리는 일제히 하락했습니다. 3년물은 3.768%, 5년물은 4.008%, 10년물은 4.230%로 마감해 단기 차입과 충당부채 할인율 가정은 높은 절대금리 수준을 계속 반영해야 합니다.</p>
+        <ul class="bond-rates">
+          <li><span class="bond-term">3년</span><span class="bond-value">3.768%</span></li>
+          <li><span class="bond-term">5년</span><span class="bond-value">4.008%</span></li>
+          <li><span class="bond-term">10년</span><span class="bond-value">4.230%</span></li>
+        </ul>
+        <p>출처(3/5/10년): <a href="https://www.yna.co.kr/view/AKR20260710136900008" target="_blank" rel="noopener">연합뉴스 / 국고채 금리 마감</a></p>
+      </div>
+    </article>
+    <article class="metric" data-category="cash" data-search="회사채 금리 AA- 자금조달 차입비용 어음할인">
+      <div class="label">회사채 금리</div>
+      <span class="value">4.466%</span>
+      <span class="move down">▼ 0.012%p</span>
+      <span class="prev">전일 종가 <b>4.478%</b></span>
+      <span class="note"><a href="https://stock.mk.co.kr/news/view/1119193" target="_blank" rel="noopener">매일경제</a> 7월 10일 장마감, 회사채 3년 AA-</span>
+      <span class="metric-toggle"></span>
+      <div class="metric-detail">
+        <p>회사채 3년 AA- 금리는 4.466%로 소폭 낮아졌지만 4% 중반대입니다. 신규 차입, 어음 할인, 지급보증 수수료, 장기 미수 거래처의 회수비용 가정에 직접 연결됩니다.</p>
+        <p>출처: <a href="https://stock.mk.co.kr/news/view/1119193" target="_blank" rel="noopener">매일경제 / 국고채·회사채 금리 표</a></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="checkpoints">
+  <div class="section-head">
+    <h2>2. 오늘의 회계팀 체크포인트</h2>
+    <p>오늘 바로 확인할 업무 중심</p>
+  </div>
+  <div class="checklist">
+    <article class="check" data-category="tax" data-search="부가가치세 확정신고 7월 27일 매입세금계산서 대손세액공제">
+      <span class="num">1</span>
+      <h3>부가세 확정신고 자료, 이번 주 안에 1차 잠금</h3>
+      <dl>
+        <dt>이슈 요약</dt>
+        <dd>국세청은 2026년 1기 부가세 확정신고를 7월 27일까지 진행한다고 안내했습니다.</dd>
+        <dt>왜 봐야 하나</dt>
+        <dd>법인사업자 136만개가 대상이고, 고환율 피해기업 등에는 납부기한 직권연장이 적용됩니다.</dd>
+        <dt>확인 업무</dt>
+        <dd>현장별 매출, 운송·원재료 매입세금계산서, 대손세액공제 후보를 먼저 대조하세요.</dd>
+      </dl>
+      <a class="check-more" href="#finance">자세히 보기 → 3. 경제·금융 체크</a>
+    </article>
+    <article class="check" data-category="tax" data-search="K-IFRS 수정목록 26-1 IFRS18 영업손익 재무제표 표시 공시">
+      <span class="num">2</span>
+      <h3>K-IFRS 수정목록 26-1, 결산 영향 확인</h3>
+      <dl>
+        <dt>이슈 요약</dt>
+        <dd>한국회계기준원은 7월 10일 K-IFRS 수정목록 26-1 발표를 공지했습니다.</dd>
+        <dt>왜 봐야 하나</dt>
+        <dd>2027년 손익계산서 표시 변경 준비와 맞물려 계정 매핑·주석 체크리스트 업데이트가 필요합니다.</dd>
+        <dt>확인 업무</dt>
+        <dd>회계정책 파일, 결산 체크리스트, ERP 계정 분류 중 영향 항목을 표시해 두세요.</dd>
+      </dl>
+      <a class="check-more" href="#finance">자세히 보기 → 3. 경제·금융 체크</a>
+    </article>
+    <article class="check" data-category="industry" data-search="하도급거래 서면실태조사 7월 13일 원사업자 대금 지급기일">
+      <span class="num">3</span>
+      <h3>하도급 서면실태조사, 원사업자 응답 오늘 마감</h3>
+      <dl>
+        <dt>이슈 요약</dt>
+        <dd>공정위 2026년 하도급거래 서면실태조사에서 원사업자 조사기간은 7월 13일까지입니다.</dd>
+        <dt>왜 봐야 하나</dt>
+        <dd>대금 지급기일, 서면발급, 안전관리 항목은 건설·제조 거래의 내부통제 이슈로 이어질 수 있습니다.</dd>
+        <dt>확인 업무</dt>
+        <dd>하도급·외주 거래의 지급조건, 증빙 보관, 미지급·유보금 항목을 정리하세요.</dd>
+      </dl>
+      <a class="check-more" href="#industry">자세히 보기 → 4. 산업·건자재 이슈</a>
+    </article>
+    <article class="check" data-category="tax" data-search="전자신고 세액공제 조세특례제한법 국회 발의 확정 전">
+      <span class="num">4</span>
+      <h3>전자신고 세액공제 발의안은 확정 전 모니터링</h3>
+      <dl>
+        <dt>이슈 요약</dt>
+        <dd>조세특례제한법 일부개정안은 전자신고 세액공제 축소분을 법률에 다시 규정하려는 취지입니다.</dd>
+        <dt>왜 봐야 하나</dt>
+        <dd>자체 신고·세무대리 비용 구조와 납세협력비용 논의에 연결됩니다. 현재는 국회 발의 단계입니다.</dd>
+        <dt>확인 업무</dt>
+        <dd>확정 전으로 표시하고, 부가세·법인세 신고비용 예산에는 아직 반영하지 마세요.</dd>
+      </dl>
+      <a class="check-more" href="#finance">자세히 보기 → 3. 경제·금융 체크</a>
+    </article>
+    <article class="check" data-category="cash global" data-search="환율 국고채 회사채 이자비용 외화환산손익">
+      <span class="num">5</span>
+      <h3>환율 1,500원 안팎, 금리는 4%대 비용 가정 유지</h3>
+      <dl>
+        <dt>이슈 요약</dt>
+        <dd>원/달러는 1,499원대로 내려왔고 회사채 3년 AA-는 4.466%로 소폭 하락했습니다.</dd>
+        <dt>왜 봐야 하나</dt>
+        <dd>외화환산손익, 차입금 이자비용, 어음 할인비용, 거래처 유동성 판단에 동시에 영향을 줍니다.</dd>
+        <dt>확인 업무</dt>
+        <dd>7월 결제 예정 외화, 변동금리 차입, 회수 지연 거래처를 한 표에서 같이 보세요.</dd>
+      </dl>
+      <a class="check-more" href="#finance">자세히 보기 → 3. 경제·금융 체크</a>
+    </article>
+  </div>
+</section>
+
+
+<section id="finance">
+  <div class="section-head">
+    <h2>3. 경제·금융 체크</h2>
+    <p>세무·자금 판단에 연결되는 항목</p>
+  </div>
+  <div class="grid">
+    <article class="card priority" data-category="tax" data-search="부가세 확정신고 납부기한 직권연장 환급 대손세액공제">
+      <div class="badges"><span class="badge tax">부가세</span><span class="badge warn">신고 준비</span></div>
+      <h3>부가세 신고 대상 692만명, 법인 136만개</h3>
+      <p>국세청은 2026년 1기 확정신고 대상이 692만 사업자이며 법인은 136만개라고 안내했습니다. 고환율 피해기업 등 103만명은 납부기한 2개월 직권연장 대상입니다.</p>
+      <p class="source">출처: <a href="https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2201&nttSn=1352987" target="_blank" rel="noopener">국세청 / 부가가치세 확정신고 보도참고자료</a></p>
+    </article>
+    <article class="card" data-category="tax" data-search="전자신고 세액공제 조세특례제한법 국회 발의 확정 전">
+      <div class="badges"><span class="badge tax">세액공제</span><span class="badge warn">현재 단계: 국회 발의</span></div>
+      <h3>전자신고 세액공제 축소분, 법률 재규정 발의</h3>
+      <p>국민참여입법센터에 공개된 조세특례제한법 일부개정안은 전자신고 세액공제 금액 축소 배경과 납세협력비용 보전 취지를 설명합니다. 확정 전이므로 신고비용 예산에는 모니터링 항목으로만 둡니다.</p>
+      <p class="source">출처: <a href="https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2218925/detailRP" target="_blank" rel="noopener">국민참여입법센터 / 조세특례제한법 일부개정법률안</a></p>
+    </article>
+    <article class="card" data-category="cash" data-search="원달러 환율 외화 결제 외화환산손익 수입원가">
+      <div class="badges"><span class="badge cash">환율</span><span class="badge ok">1,500원 안팎</span></div>
+      <h3>USD/KRW 1,499.15원, 외화 결제표 업데이트</h3>
+      <p>Investing.com 기준 7월 10일 USD/KRW 종가는 1,499.15원입니다. 수입 원재료 결제, 외화 미지급금, 외화예금 평가손익은 1,500원 기준 민감도를 새로 저장해 두세요.</p>
+      <p class="source">출처: <a href="https://kr.investing.com/currencies/usd-krw-historical-data" target="_blank" rel="noopener">Investing.com / USD KRW Historical Data</a></p>
+    </article>
+    <article class="card" data-category="cash" data-search="국고채 회사채 금리 차입비용 어음할인 보증수수료">
+      <div class="badges"><span class="badge cash">금리</span><span class="badge warn">높은 절대수준</span></div>
+      <h3>국고채·회사채 금리는 소폭 하락, 비용 부담은 유지</h3>
+      <p>10일 국고채 3년물은 3.768%, 회사채 3년 AA-는 4.466%로 마감했습니다. 신규 차입 협상, 어음 할인, 장기 미수 회수비용은 4%대 금리 환경을 전제로 보세요.</p>
+      <p class="source">출처: <a href="https://www.yna.co.kr/view/AKR20260710136900008" target="_blank" rel="noopener">연합뉴스 / 국고채 금리</a>, <a href="https://stock.mk.co.kr/news/view/1119193" target="_blank" rel="noopener">매일경제 / 회사채 금리</a></p>
+    </article>
+    <article class="card" data-category="tax" data-search="K-IFRS 제1118호 손익계산서 영업손익 주석 공시 수정목록 26-1">
+      <div class="badges"><span class="badge tax">회계기준</span><span class="badge warn">2027년 적용 준비</span></div>
+      <h3>손익계산서 표시 변경 준비, 계정 분류표부터</h3>
+      <p>금융위는 K-IFRS 제1118호 제정으로 2027년부터 손익계산서 표시와 영업손익 개념이 바뀐다고 공표했습니다. 7월 10일 K-IFRS 수정목록 공지와 함께 결산 양식 변경 영향을 확인할 시점입니다.</p>
+      <p class="source">출처: <a href="https://www.fsc.go.kr/no010101/85886?curPage=&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=" target="_blank" rel="noopener">금융위원회 / K-IFRS 제1118호 보도자료</a>, <a href="https://www.kasb.or.kr/" target="_blank" rel="noopener">한국회계기준원 / 공지사항</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="industry">
+  <div class="section-head">
+    <h2>4. 산업·건자재 이슈</h2>
+    <p>진행상태 우선 표시</p>
+  </div>
+  <div class="grid">
+    <article class="card priority" data-category="industry" data-search="하도급거래 서면실태조사 제조 건설 대금 지급기일 안전관리">
+      <div class="badges"><span class="badge industry">하도급</span><span class="badge warn">진행상태: 원사업자 조사 오늘까지</span></div>
+      <h3>하도급 실태조사, 지급조건·서면발급 내부점검 기회</h3>
+      <p>공정위 조사는 제조·용역·건설 업종 원사업자 1만개와 수급사업자 9만개를 대상으로 합니다. 대금 지급기일 구간 세분화와 안전관리 실태까지 확인하는 흐름입니다.</p>
+      <p>회계팀 관점: 외주·운송·하도급성 거래의 지급기일, 유보금, 증빙 보관, 미지급금 계상 기준을 맞춰 두세요.</p>
+      <p class="source">출처: <a href="https://www.ftc.go.kr/www/selectBbsNttView.do?bordCd=3&key=12&nttSn=47579&searchCtgry=01%2C02" target="_blank" rel="noopener">공정거래위원회 / 2026년 하도급거래 서면실태조사</a></p>
+    </article>
+    <article class="card priority" data-category="industry" data-search="레미콘 운송료 타결 정상화 운반비 단가 원가">
+      <div class="badges"><span class="badge industry">레미콘</span><span class="badge ok">진행상태: 타결 완료</span></div>
+      <h3>수도권 레미콘 운송중단은 종료, 단가 반영이 남은 일</h3>
+      <p>6월 15일 합의안 가결로 집단휴업은 종료됐고, 수도권 평균 운송단가는 회당 7만5,800원에서 8만원으로 인상되는 내용이 보도됐습니다.</p>
+      <p>회계팀 관점: 7월 적용 운반비 단가, 표준원가 갱신, 거래처 단가 협의 반영 시점을 확인하세요.</p>
+      <p class="source">출처: <a href="https://bizhankook.com/articles/32543" target="_blank" rel="noopener">비즈한국 / 레미콘 운송료 합의안 가결</a></p>
+    </article>
+    <article class="card" data-category="industry" data-search="PHC파일 운송 중단 후속 확인 필요 납기 지연 매출 인식">
+      <div class="badges"><span class="badge industry">PHC파일</span><span class="badge warn">진행상태: 후속 공개 제한</span></div>
+      <h3>PHC파일 운송 리스크, 최신 타결 보도는 제한적</h3>
+      <p>6월 19일 보도 기준 일부 지역 운전기사들이 운송비 인상을 요구하며 PHC파일 운송에 차질이 발생했습니다. 7월 13일 오전 공개 검색 기준 명확한 타결 후속은 제한적입니다.</p>
+      <p>회계팀 관점: 납기 지연, 지체상금, 운송비 재협상, 월말 매출 인식 가능성을 현장별로 확인하세요.</p>
+      <p class="source">출처: <a href="https://v.daum.net/v/20260619062016108" target="_blank" rel="noopener">대한경제 / PHC파일 운송 리스크</a></p>
+    </article>
+    <article class="card" data-category="industry" data-search="건설경기 시멘트 레미콘 출하량 원가 고정비">
+      <div class="badges"><span class="badge industry">건설경기</span><span class="badge warn">수요 점검</span></div>
+      <h3>건설경기 부진 속 운반비 상승분 흡수 여부 확인</h3>
+      <p>운송 리스크가 종료돼도 수요 회복이 늦으면 단가 인상분을 매출단가에 바로 전가하기 어렵습니다. 레미콘·PHC파일 모두 출하량과 운반비가 원가율을 흔드는 조합입니다.</p>
+      <p>회계팀 관점: 제품별 표준원가와 실제원가 차이, 운반비 계정, 현장별 매출채권 회수 속도를 같이 보세요.</p>
+      <p class="source">출처: <a href="https://bizhankook.com/articles/32543" target="_blank" rel="noopener">비즈한국 / 레미콘 운송단가</a>, <a href="https://v.daum.net/v/20260619062016108" target="_blank" rel="noopener">대한경제 / PHC파일 운송</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="competitors">
+  <div class="section-head">
+    <h2>5. 경쟁사 동향</h2>
+    <p>유진그룹·삼표그룹·PHC파일 업계 위주, 확인되는 만큼</p>
+  </div>
+  <div class="grid">
+    <article class="card" data-category="industry" data-search="유진기업 DART 분기보고서 레미콘 골재 실적 원가율">
+      <div class="badges"><span class="badge industry">유진기업</span><span class="badge warn">공시 확인</span></div>
+      <h3>유진기업 2026년 분기보고서, 업계 원가율 비교 기준</h3>
+      <p>DART 정기공시 항목별 검색에서 유진기업 2026년 분기보고서가 확인됩니다. 반기 실적 공시 전까지는 1분기 매출·원가율·재고 흐름을 비교 기준으로 두면 좋습니다.</p>
+      <p>회계팀 관점: 우리 레미콘·골재 부문 원가율과 운반비 비중을 경쟁사 공시 기준으로 벤치마킹하세요.</p>
+      <p class="source">출처: <a href="https://dart.fss.or.kr/navi/searchNavi.do?naviCode=A002&naviCrpCik=00184667&naviCrpNm=%EC%9C%A0%EC%A7%84%EA%B8%B0%EC%97%85" target="_blank" rel="noopener">DART / 유진기업 정기공시 항목별 검색</a></p>
+    </article>
+    <article class="card" data-category="industry" data-search="삼표시멘트 주가 시멘트 레미콘 삼표산업 투자 시장 신호">
+      <div class="badges"><span class="badge industry">삼표시멘트</span><span class="badge warn">시장 신호</span></div>
+      <h3>삼표시멘트 7월 10일 종가 8,260원</h3>
+      <p>Investing.com 공개 화면은 7월 12일 기준 삼표시멘트 가격을 8,260원으로 표시했습니다. 직접적인 원가 자료는 아니지만 시멘트·레미콘 업황 기대를 보는 보조 지표입니다.</p>
+      <p>회계팀 관점: 시멘트·레미콘 관련 금융상품, 거래처 신용, 업계 마진 기대를 해석할 때 참고만 하세요.</p>
+      <p class="source">출처: <a href="https://kr.investing.com/equities/tongyang-cement-energy-corp" target="_blank" rel="noopener">Investing.com / 삼표시멘트</a></p>
+    </article>
+    <article class="card" data-category="industry" data-search="삼표그룹 성수 레미콘 부지 개발 공식 보도자료">
+      <div class="badges"><span class="badge industry">삼표그룹</span><span class="badge ok">공식자료</span></div>
+      <h3>삼표그룹, 성수 레미콘 부지 개발 방향성 계속 노출</h3>
+      <p>삼표그룹은 2026 서울국제정원박람회 보도자료에서 삼표레미콘 부지 개발 방향성을 미리 엿볼 수 있는 자연주의 설계를 언급했습니다. 단기 수급보다 중장기 자산 활용 신호에 가깝습니다.</p>
+      <p>회계팀 관점: 경쟁사의 비제조 자산 활용, 개발사업 현금흐름, 레미콘 사업 포트폴리오 변화를 모니터링하세요.</p>
+      <p class="source">출처: <a href="https://sampyo.co.kr/media/" target="_blank" rel="noopener">삼표그룹 / 미디어·보도자료</a></p>
+    </article>
+    <article class="card" data-category="industry" data-search="동양파일 PHC파일 분기보고서 건설경기 수요 재고">
+      <div class="badges"><span class="badge industry">PHC파일 업계</span><span class="badge warn">공시 대기</span></div>
+      <h3>PHC파일 경쟁사는 반기보고서 전까지 운송·수요 신호 우선</h3>
+      <p>동양파일 등 PHC파일 업체의 최신 정기공시는 반기보고서 제출 전까지 제한적입니다. 현재는 운송 차질 후속, 건설 착공, 재고·출하량 신호가 더 빠른 판단 재료입니다.</p>
+      <p>회계팀 관점: 파일 단가와 물량이 확인되면 견적 원가와 매출채권 회수 가정에 바로 반영하세요.</p>
+      <p class="source">출처: <a href="https://dart.fss.or.kr/info/main.do?menu=410" target="_blank" rel="noopener">DART / 2026년 정기보고서 제출기한</a>, <a href="https://v.daum.net/v/20260619062016108" target="_blank" rel="noopener">대한경제 / PHC파일 운송 리스크</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="global">
+  <div class="section-head">
+    <h2>6. 글로벌 뉴스 한입</h2>
+    <p>환율·원가·공급망 연결 이슈</p>
+  </div>
+  <div class="grid">
+    <article class="card" data-category="global industry" data-search="국제유가 WTI Brent 중동 공급망 운송비 원가">
+      <div class="badges"><span class="badge global">원자재</span><span class="badge warn">중동 리스크</span></div>
+      <h3>유가, 중동 공급 차질 우려로 주간 상승 압력</h3>
+      <p>Reuters 보도는 중동 공급 차질 우려가 남아 7월 10일 유가가 주간 상승 흐름을 보였다고 전했습니다. 운송비와 석유계 원재료 단가는 시차를 두고 반영될 수 있습니다.</p>
+      <p class="source">출처: <a href="https://wtvbam.com/2026/07/09/oil-edges-lower-but-heads-for-weekly-gain-as-middle-east-supply-risks-persist/" target="_blank" rel="noopener">Reuters via WTVB / Oil market</a></p>
+    </article>
+    <article class="card" data-category="global tax" data-search="OECD 글로벌 최저한세 GIR 신고 포털 페널티 유예 Pillar Two">
+      <div class="badges"><span class="badge global">국제조세</span><span class="badge warn">GMT 행정지침</span></div>
+      <h3>OECD, 글로벌 최저한세 GIR 행정 부담 완화 공통이해 발표</h3>
+      <p>OECD는 2024년 도입 관할권들이 중앙 제출된 GloBE Information Return에 대해 현지 신고의무 페널티를 유예·완화하는 공통이해를 발표했습니다.</p>
+      <p class="source">출처: <a href="https://www.oecd.org/en/about/news/announcements/2026/05/global-minimum-tax-release-of-a-common-understanding-of-implementing-jurisdictions-and-further-administrative-guidance-to-support-compliance.html" target="_blank" rel="noopener">OECD / Global Minimum Tax administrative guidance</a></p>
+    </article>
+    <article class="card" data-category="global cash" data-search="IMF 세계경제 성장률 2026 유가 인플레이션 AI 투자">
+      <div class="badges"><span class="badge global">거시</span><span class="badge warn">인플레 경계</span></div>
+      <h3>IMF 전망은 성장 둔화와 AI 투자 회복력을 동시에 제시</h3>
+      <p>AP는 IMF가 2026년 세계 성장률 전망을 3%로 제시하며 에너지 가격과 전쟁 영향을 언급했다고 전했습니다. 환율·유가·수입 원가 가정은 단일 시나리오보다 범위로 보는 편이 안전합니다.</p>
+      <p class="source">출처: <a href="https://apnews.com/article/5df2a8eb775b94bb6de1067fd694f6f0" target="_blank" rel="noopener">AP / IMF global outlook</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="section-head">
+    <h2>7. 생성형 AI 모델 발전현황</h2>
+    <p>회계·재무 업무 자동화 관점</p>
+  </div>
+  <div class="grid">
+    <article class="card priority" data-category="tax global" data-search="Oracle ERP finance AI agents ledger expenses payables payments 내부통제">
+      <div class="badges"><span class="badge tax">ERP</span><span class="badge global">재무 AI</span></div>
+      <h3>Oracle ERP 26B, 재무용 AI 에이전트 4종 일반 제공</h3>
+      <p>Oracle은 Release 26B에서 Ledger, Expenses, Payables, Payments Agent를 일반 제공한다고 밝혔습니다. 결산·지급·비용 처리 자동화는 권한, 승인 로그, 예외 검토 책임자를 먼저 정해야 합니다.</p>
+      <p class="source">출처: <a href="https://blogs.oracle.com/fusioninsider/agentic-ai-in-erp-four-agents-you-can-use-today" target="_blank" rel="noopener">Oracle Blog / Agentic AI in ERP</a></p>
+    </article>
+    <article class="card" data-category="tax global" data-search="OpenAI ChatGPT Excel finance integrations financial data controls">
+      <div class="badges"><span class="badge tax">Excel 자동화</span><span class="badge global">금융 데이터</span></div>
+      <h3>ChatGPT for Excel·금융 데이터 연동, 모델링 자동화 범위 확대</h3>
+      <p>OpenAI는 ChatGPT for Excel과 금융 데이터 연동을 소개하며 모델 작성·시나리오 분석·자료 추출 업무를 지원한다고 밝혔습니다. 회계팀은 파일 반출, 수식 검토, 버전 관리 기준이 먼저입니다.</p>
+      <p class="source">출처: <a href="https://openai.com/index/chatgpt-for-excel/" target="_blank" rel="noopener">OpenAI / ChatGPT for Excel</a></p>
+    </article>
+    <article class="card" data-category="global" data-search="ChatGPT Enterprise Slack connector actions usage limits billing analytics governance">
+      <div class="badges"><span class="badge global">협업 자동화</span><span class="badge warn">관리자 통제</span></div>
+      <h3>ChatGPT Enterprise, Slack 액션·사용량 관리 기능 확대</h3>
+      <p>OpenAI Help Center 릴리스 노트는 Enterprise·Edu에서 Slack connector actions와 사용량·결제 분석 기능을 안내합니다. 사내 적용 시 채널 권한과 월별 크레딧 한도부터 정해야 합니다.</p>
+      <p class="source">출처: <a href="https://help.openai.com/en/articles/10128477-chatgpt-enterprise-edu-release-notes" target="_blank" rel="noopener">OpenAI Help Center / Enterprise & Edu release notes</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="coffee">
+  <div class="section-head">
+    <h2>8. 커피 마시면서 보기 좋은 가벼운 기사</h2>
+    <p>업무 판단과 분리한 짧은 읽을거리</p>
+  </div>
+  <div class="grid two">
+    <article class="card" data-category="light" data-search="SAP Joule AI assistant finance procurement operations autonomous enterprise">
+      <div class="badges"><span class="badge light">업무 트렌드</span></div>
+      <h3>SAP Sapphire 2026, Joule 기반 자율기업 흐름 소개</h3>
+      <p>SAP는 Joule Work, SAP Business AI Platform, SAP Autonomous Suite를 중심으로 업무 자동화 흐름을 소개했습니다. ERP를 쓰지 않아도 회계·구매·운영 데이터가 연결되는 방향은 참고할 만합니다.</p>
+      <p class="source">출처: <a href="https://www.sap.com/topics/events/sapphire/innovation-news-guide-2026" target="_blank" rel="noopener">SAP / Sapphire 2026 Innovation News Guide</a></p>
+    </article>
+    <article class="card" data-category="light" data-search="OpenAI PwC CFO finance workflow agents forecasting controls tax reporting">
+      <div class="badges"><span class="badge light">CFO 사례</span></div>
+      <h3>OpenAI·PwC, CFO 조직의 AI 에이전트 활용 사례 제시</h3>
+      <p>OpenAI와 PwC는 재무예측, 세무, 보고, 계약 검토 등 CFO 업무 흐름에 AI 에이전트를 적용하는 협업을 소개했습니다. 오늘 당장 할 일은 작은 반복 업무 한 가지를 자동화 후보로 적어두는 것입니다.</p>
+      <p class="source">출처: <a href="https://openai.com/index/openai-pwc-finance-collaboration/" target="_blank" rel="noopener">OpenAI / PwC finance collaboration</a></p>
+    </article>
+  </div>
+</section>
+
+<section id="energy">
+  <div class="section-head">
+    <h2>9. 오늘의 기운나는 한 줄</h2>
+    <p>사내 공유용 짧은 문구</p>
+  </div>
+  <div class="quote">
+    <p>오늘은 숫자를 맞추는 날이 아니라, 다음 마감이 편해지는 길을 닦는 날입니다.</p>
+    <span>직접 작성한 회계팀 응원 문구</span>
+  </div>
+</section>
+    </main>
+  </div>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll(".filter"));
+    const searchable = Array.from(document.querySelectorAll("[data-category]"));
+    const searchInput = document.getElementById("searchInput");
+
+    let activeFilter = "all";
+
+    function normalize(value) {
+      return (value || "").toLowerCase().replace(/\s+/g, " ").trim();
+    }
+
+    function applyFilters() {
+      const query = normalize(searchInput.value);
+      searchable.forEach((node) => {
+        const categories = (node.dataset.category || "").split(/\s+/);
+        const text = normalize(node.innerText + " " + (node.dataset.search || ""));
+        const filterMatch = activeFilter === "all" || categories.includes(activeFilter);
+        const searchMatch = !query || text.includes(query);
+        node.classList.toggle("hidden", !(filterMatch && searchMatch));
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener("input", applyFilters);
+
+    const metricCards = Array.from(document.querySelectorAll(".metric"));
+    metricCards.forEach((metric) => {
+      const sourceLink = metric.querySelector(".note a");
+      if (sourceLink) {
+        sourceLink.addEventListener("click", (event) => event.stopPropagation());
+      }
+      const detailLinks = metric.querySelectorAll(".metric-detail a");
+      detailLinks.forEach((link) => link.addEventListener("click", (event) => event.stopPropagation()));
+      metric.addEventListener("click", () => {
+        metric.classList.toggle("open");
+      });
+    });
+
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+        });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
